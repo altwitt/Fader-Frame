@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Fader &amp; Frame — Where signals meet structure.</title>
+  <meta name="description" content="Geospatial, data storytelling, and audio‑infused interfaces. Control the signal. Define the frame."/>
+  <meta name="theme-color" content="#0F1115"/>
+  <meta property="og:title" content="Fader &amp; Frame — Where signals meet structure."/>
+  <meta property="og:description" content="Maps with cadence. Data with feel. Geospatial, creative tech, and audio/visual."/>
+  <meta property="og:type" content="website"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --frame-black: #0F1115;
+      --paper-white: #F7F8FA;
+      --signal-cyan: #28C1D1;
+      --echo-purple: #7A5CFA;
+      --grid-gray: #9AA3AF;
+      --radius-xl: 20px;
+      --shadow-sm: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-md: 0 12px 30px rgba(0,0,0,0.12);
+      --maxw: 1100px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--paper-white);
+      color: var(--frame-black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--signal-cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 24px; }
+    header { position: sticky; top: 0; backdrop-filter: saturate(1.2) blur(8px); background: rgba(247,248,250,0.85); border-bottom: 1px solid rgba(0,0,0,0.06); z-index: 10; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-title { font-family: "Space Grotesk", Inter, system-ui, sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    .logo svg { width: 40px; height: 40px; display: block; }
+    .nav-links a { padding: 8px 12px; border-radius: 10px; }
+    .nav-cta { background: var(--frame-black); color: var(--paper-white); padding: 10px 14px; border-radius: 12px; box-shadow: var(--shadow-sm); }
+    .nav-cta:hover { opacity: 0.92; text-decoration: none; }
+    .hero { padding: 72px 0 36px; }
+    h1 { font-family: "Space Grotesk", Inter, system-ui, sans-serif; font-size: clamp(36px, 5vw, 56px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; }
+    .sub {
+      font-size: clamp(16px, 2.2vw, 20px);
+      color: #222a;
+      max-width: 800px;
+      margin-bottom: 24px;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 12px 18px; border-radius: 12px; border: 1px solid transparent; }
+    .btn-primary { background: var(--signal-cyan); color: var(--frame-black); font-weight: 600; }
+    .btn-secondary { border-color: #0002; color: var(--frame-black); background: white; }
+    .trust { display: grid; grid-auto-flow: column; gap: 16px; align-items: center; justify-content: start; color: #0007; font-size: 14px; margin-top: 18px; }
+    .section { padding: 48px 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: white; border: 1px solid #00000010; border-radius: var(--radius-xl); padding: 18px; box-shadow: var(--shadow-sm); }
+    h2 { font-family: "Space Grotesk", Inter, system-ui, sans-serif; font-size: clamp(24px, 3.2vw, 34px); margin: 0 0 12px; letter-spacing: -0.01em; }
+    h3 { font-family: "Space Grotesk", Inter, system-ui, sans-serif; margin: 0 0 8px; font-size: 18px; }
+    .work .thumb { aspect-ratio: 16/9; border-radius: 14px; background: linear-gradient(135deg, var(--signal-cyan), var(--echo-purple)); opacity: 0.9; }
+    .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+    .tag { display: inline-block; border: 1px solid #00000018; padding: 6px 10px; border-radius: 999px; font-size: 13px; margin: 4px 6px 0 0; background: #fff; }
+    .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; }
+    form { display: grid; gap: 12px; }
+    input, select, textarea { padding: 12px; border-radius: 12px; border: 1px solid #0001; background: white; font: inherit; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--signal-cyan); border-color: transparent; }
+    .footer { padding: 36px 0 60px; color: #0008; }
+    .skip-link { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip-link:focus { position: static; width: auto; height: auto; padding: 8px 12px; background: var(--signal-cyan); color: var(--frame-black); border-radius: 6px; }
+    @media (max-width: 900px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; }
+      .trust { grid-auto-flow: row; justify-items: start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <a class="logo" href="#" aria-label="Fader & Frame home" title="Fader &amp; Frame">
+          <!-- Inline Concept A SVG (small) -->
+          <svg width="40" height="40" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="36" y="36" width="440" height="440" rx="28" fill="none" stroke="var(--frame-black)" stroke-width="20"/>
+            <line x1="256" y1="20" x2="256" y2="44" stroke="var(--grid-gray)" stroke-width="10" stroke-linecap="round"/>
+            <line x1="256" y1="468" x2="256" y2="492" stroke="var(--grid-gray)" stroke-width="10" stroke-linecap="round"/>
+            <line x1="20" y1="256" x2="44" y2="256" stroke="var(--grid-gray)" stroke-width="10" stroke-linecap="round"/>
+            <line x1="468" y1="256" x2="492" y2="256" stroke="var(--grid-gray)" stroke-width="10" stroke-linecap="round"/>
+            <rect x="92" y="128" width="36" height="256" fill="var(--frame-black)"/>
+            <rect x="92" y="128" width="140" height="36" fill="var(--frame-black)"/>
+            <rect x="92" y="232" width="120" height="32" fill="var(--frame-black)"/>
+            <rect x="384" y="128" width="36" height="256" fill="var(--frame-black)"/>
+            <rect x="288" y="128" width="132" height="36" fill="var(--frame-black)"/>
+            <rect x="304" y="232" width="116" height="32" fill="var(--frame-black)"/>
+            <line x1="256" y1="128" x2="256" y2="352" stroke="var(--frame-black)" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="256" cy="248" r="30" fill="var(--signal-cyan)"/>
+          </svg>
+        </a>
+        <div class="brand-title">Fader &amp; Frame</div>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact" class="nav-cta">Start a project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="container hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Control the signal. Define the frame.</h1>
+      <p class="sub">Geospatial, data storytelling, and audio‑infused interfaces by Fader &amp; Frame. <strong>Where signals meet structure.</strong></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">Start a project</a>
+        <a class="btn btn-secondary" href="#work">See work</a>
+      </div>
+      <div class="trust" aria-label="Tech we use">
+        <span>Mapbox</span> • <span>ArcGIS</span> • <span>Leaflet</span> • <span>deck.gl</span> • <span>PostGIS</span> • <span>React</span> • <span>Python</span>
+      </div>
+    </section>
+
+    <section id="services" class="section container">
+      <h2>Services</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Geospatial</h3>
+          <p>Web maps, cartography, spatial analytics, routing, dashboards. Blend the layers. Frame the story.</p>
+        </div>
+        <div class="card">
+          <h3>Creative Tech</h3>
+          <p>Prototypes, interactive explainers, microsites, and UI/UX that surface patterns your data already knows.</p>
+        </div>
+        <div class="card">
+          <h3>Audio/Visual</h3>
+          <p>Sound branding, light production, and AV integrations so interfaces have rhythm as well as clarity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section container work">
+      <h2>Featured Work</h2>
+      <div class="grid-3">
+        <article class="card">
+          <div class="thumb" role="img" aria-label="City soundwalk project thumbnail"></div>
+          <h3>City Soundwalk</h3>
+          <p>Location‑based audio map with geo‑fenced crossfades and offline cache.</p>
+          <div><span class="tag">Mapbox</span><span class="tag">Audio</span><span class="tag">UX</span></div>
+        </article>
+        <article class="card">
+          <div class="thumb" role="img" aria-label="Logistics health dashboard thumbnail"></div>
+          <h3>Signal Stack</h3>
+          <p>Deck.gl overlays for live telemetry; anomaly call‑outs for faster stand‑ups.</p>
+          <div><span class="tag">deck.gl</span><span class="tag">PostGIS</span><span class="tag">Dashboards</span></div>
+        </article>
+        <article class="card">
+          <div class="thumb" role="img" aria-label="Festival atlas project thumbnail"></div>
+          <h3>Festival Atlas</h3>
+          <p>Stages, vendors, wayfinding—plus a reactive visualizer for jumbotrons.</p>
+          <div><span class="tag">Leaflet</span><span class="tag">PMTiles</span><span class="tag">AV</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="process" class="section container">
+      <h2>Process</h2>
+      <div class="process-steps">
+        <div class="card"><h3>1) Discover</h3><p>Define the signal. Goals, constraints, and success metrics.</p></div>
+        <div class="card"><h3>2) Frame</h3><p>Architecture, wireframes, and map styles to set context.</p></div>
+        <div class="card"><h3>3) Build</h3><p>Implement, test, tune. Accessibility baked in from day one.</p></div>
+        <div class="card"><h3>4) Deliver</h3><p>Deploy, document, handoff. Smooth ops and maintainability.</p></div>
+      </div>
+    </section>
+
+    <section id="about" class="section container about">
+      <div>
+        <h2>About</h2>
+        <p>Founded by <strong>Harrison Altman Witt</strong>, a GIS developer and musician who likes his data like his mixes: clear, balanced, and on‑time.</p>
+        <p>Toolbox: Mapbox GL JS, ArcGIS Online/Pro/Experience Builder, Leaflet, deck.gl, Tippecanoe/PMTiles, PostGIS, Python, Node, React.</p>
+        <p>Based in Memphis, working remotely across the U.S.</p>
+      </div>
+      <div class="card">
+        <h3>Stack</h3>
+        <p><span class="tag">Mapbox GL</span><span class="tag">ArcGIS</span><span class="tag">Leaflet</span><span class="tag">deck.gl</span><span class="tag">PostGIS</span><span class="tag">Python</span><span class="tag">React</span></p>
+      </div>
+    </section>
+
+    <section id="contact" class="section container">
+      <h2>Start a Project</h2>
+      <p>Tell us about your map, product, or story. We’ll respond within one business day.</p>
+      <form aria-label="Project inquiry" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch.');">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Full name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@company.com" required>
+        </label>
+        <label>
+          Project type
+          <select name="type">
+            <option>Geospatial</option>
+            <option>Creative Tech</option>
+            <option>Audio/Visual</option>
+          </select>
+        </label>
+        <label>
+          Budget range
+          <select name="budget">
+            <option>Under $5k</option>
+            <option>$5k–$15k</option>
+            <option>$15k–$40k</option>
+            <option>$40k+</option>
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="5" placeholder="A few lines about goals, timeline, and any links."></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div>&copy; <span id="year"></span> Fader &amp; Frame. <em>Blend the layers. Frame the story.</em></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
